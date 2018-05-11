@@ -25,7 +25,8 @@ Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
 	gfx( wnd ),
-	level()
+	level(),
+	place(0)
 {
 
 }
@@ -44,11 +45,11 @@ void Game::UpdateModel()
 	
 	if (input.IsPress())
 	{
-		unsigned char val = input.GetCode(); 
-		val -= '1';
-		if (val >= 0 && val <= 5)
+		place = input.GetCode(); 
+		place -= '1';
+		if (place >= 0 && place <= 5)
 		{
-			 mat = &samples[val];
+			 mat = &samples[place];
 		}
 		if (std::toupper(input.GetCode()) == 'S')
 		{
@@ -63,7 +64,7 @@ void Game::UpdateModel()
 		}
 		else
 		{
-			level.Add(*mat);
+			level.Add(*mat,place);
 			mat = nullptr;
 		}
 	}

@@ -1,10 +1,11 @@
 #include"EditorLevel.h"
 
-void EditorLevel::Add( PhysicsMat&  lo)
+void EditorLevel::Add( PhysicsMat&  lo,int place)
 {
 	Object obj(lo);
-	auto it = std::find(obj.samples.begin(), obj.samples.end(), lo);
-	int i = obj.samples.begin() - it;
+	bool found = false;
+	assert(place<int(Object::Type::Count)&&place>int(Object::Type::NoType));
+	int i = place;
 	obj.type = EditorLevel::Object::Type(i);
 	objects.emplace_back(obj);
 }
@@ -47,15 +48,10 @@ void EditorLevel::Save(std::string filename)
 	{
 		//dont wanna just put a random address in the .lvl file with the PhysicsMat pointer 
 		//so make the pointer point to a nullptr and then return its address so i can still see the level
-		int size = sizeof(Object) - sizeof(i->samples);
 		m = i->mat;
 		i->mat = nullptr;
 		fout.write(reinterpret_cast<char*>(i._Ptr),sizeof(*i) - sizeof(i->samples));
-		size = int(fout.tellp()) - sizeof(i->samples);
-		//fout.seekp(int(fout.tellp()) - sizeof(i->samples));
-		size = fout.tellp();
 		i->mat = m;
 	}
-	int size = fout.tellp();
 	fout.close();
 }

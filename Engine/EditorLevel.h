@@ -18,8 +18,9 @@ public:
 			RightTile,
 			LeftTile,
 			RightCornerTile,
-			LeftCotnerTile,
-			Hero
+			LeftCornerTile,
+			Hero,
+			Count
 		};
 
 
@@ -71,7 +72,7 @@ private:
 	std::vector<Object> objects;
 public:
 	EditorLevel() = default;
-	void Add( PhysicsMat& lo);
+	void Add( PhysicsMat& lo,int place);
 	void Remove(const Object& lo);
 	void Draw(Graphics& gfx);
 	void Save(std::string filename);

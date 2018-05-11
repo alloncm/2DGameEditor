@@ -46,6 +46,7 @@ private:
 	/*  User Variables              */
 	EditorLevel level;
 	PhysicsMat* mat = nullptr;
+	unsigned char place;
 	/********************************/
 	std::vector<PhysicsMat> samples
 	{

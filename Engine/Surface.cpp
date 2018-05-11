@@ -153,6 +153,22 @@ Surface Surface::CutRect(Rect<int> r)const
 	return s;
 }
 
+bool Surface::operator==(const Surface & s)
+{
+	if (this->GetHeight() != s.GetHeight() || this->GetWidth() != s.GetWidth())
+	{
+		return false;
+	}
+	for (int i = 0; i < this->pixels.size(); i++)
+	{
+		if (this->pixels[i] != s.pixels[i])
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
 //not working and not even using
 /*
 void Surface::Save(std::string & filename)
